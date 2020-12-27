@@ -1,0 +1,7 @@
+# virtualenvs
+venv/
+
+# IDEs
+.idea/
+.vscode/
+*.iml

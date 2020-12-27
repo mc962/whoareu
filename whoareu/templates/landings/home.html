@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>For Your Information</h1>
+    <table id="request_data">
+        <thead class="info-heading">
+            <tr>
+                <th class="info-title" colspan="3">Who you are</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>Data</th>
+                <th>Source</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="browser_data">
+                <th>Browser Information</th>
+                <td>
+                    <table id="browser_data_points">
+                        <tbody>
+                        <tr>
+                            <th>Browser</th>
+                            <td>{{ request_info.browser() }}</td>
+                        </tr>
+                        <tr>
+                            <th>Platform</th>
+                            <td>{{ request_info.platform() }}</td>
+                        </tr>
+                        <tr>
+                            <th>Version</th>
+                            <td>{{ request_info.version() }}</td>
+                        </tr>
+                        <tr>
+                            <th>User Agent</th>
+                            <td>{{ request_info.user_agent }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent" target="_blank" rel="noopener">User-Agent</a></td>
+            </tr>
+                <tr id="default_ip_address_data">
+                <th>IP Address (IPv<span class="ip-version">{{ request_info.ip_version }}</span>)</th>
+                <td data-ip-version="{{ request_info.ip_version }}" class="ip-address">{{ request_info.ip_address }}</td>
+                <td>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For" target="_blank" rel="noopener">X-Forwarded-For</a>,&#160;<a href="https://tools.ietf.org/html/rfc3875#section-4.1.8" target="_blank" rel="noopener">REMOTE_ADDR</a>
+                </td>
+            </tr>
+            <tr id="alternative_ip_address_data" class="alternative-ip-data">
+                <th class="alternative-ip-data">IP Address (IPv<span class="ip-version">{{ request_info.alternative_ip_version }}</span>)</th>
+                <td data-ip-version="{{ request_info.alternative_ip_version }}" class="alternative-ip-data ip-address">Loading...</td>
+                <td class="alternative-ip-data">
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For" target="_blank" rel="noopener">X-Forwarded-For</a>,&#160;<a href="https://tools.ietf.org/html/rfc3875#section-4.1.8" target="_blank" rel="noopener">REMOTE_ADDR</a>
+                </td>
+            </tr>
+            <tr id="language_data">
+                <th>Language</th>
+                <td>{{ request_info.display_language() }}</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language" target="_blank" rel="noopener">Accept-Language</a></td>
+            </tr>
+            <tr id="referer_data">
+                <th>Referer</th>
+                <td>{{ request_info.referer }}</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer" target="_blank" rel="noopener">Referer</a></td>
+            </tr>
+            <tr id="method_data">
+                <th>HTTP Method</th>
+                <td>{{ request_info.method }}</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank" rel="noopener">HTTP request methods</a> - <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/{{ request_info.method }}" target="_blank" rel="noopener">{{ request_info.method }}</a></td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

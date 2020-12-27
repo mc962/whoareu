@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{% block title %}{% endblock %}Who Are You</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+<!--        <link rel="stylesheet" href="{{ url_for('static', filename='css/application.css') }}" />-->
+
+        {% block head %}{% endblock %}
+        <meta name="description" content="Information about you." />
+        <style>
+            table, tr, th, td {
+                border: 1px solid black;
+                border-spacing: 0px;
+                padding: 0;
+            }
+
+            #browser_data_points {
+                border: 0px;
+            }
+
+            #request_data {
+                width: 100%;
+            }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const alternativeIPEl = document.querySelector('.alternative-ip-data .ip-address');
+                fetch('/ping', {headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}})
+                .then(resp => resp.json())
+                .then((result) => {
+                    console.log(result);
+                    const alternativeIPEl = document.querySelector('.alternative-ip-data .ip-address');
+                    alternativeIPEl.textContent = result.alternative_ip_address;
+                })
+                .catch((err) => {
+                    console.error(err);
+                    alternativeIPEl.textContent = `IP Address not available for IPv${alternativeIPEl.dataset.ipVersion}`
+                });
+            });
+        </script>
+        <noscript>
+            JavaScript is required to support loading information for <em>both</em> IPv4 and IPv6 addresses.
+        </noscript>
+    </head>
+    <body>
+        <header id="header"></header>
+
+        <main id="root">
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer id="footer"></footer>
+    </body>
+</html>
