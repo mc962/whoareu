@@ -1,0 +1,12 @@
+# Docker
+.dockerignore
+Dockerfile
+
+# virtualenv
+venv/
+
+# IDEs
+.idea/
+
+# git
+.git/
