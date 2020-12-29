@@ -43,13 +43,22 @@ class UserInfo:
     method: str
 
     def browser(self) -> str:
-        return self.user_agent.browser.capitalize()
+        if self.user_agent:
+            return self.user_agent.browser.capitalize()
+        else:
+            return ''
 
     def platform(self) -> str:
-        return UserInfo.PLATFORMS_DISPLAY.get(self.user_agent.platform) or self.user_agent.platform.capitalize()
+        if self.user_agent:
+            return UserInfo.PLATFORMS_DISPLAY.get(self.user_agent.platform) or self.user_agent.platform.capitalize()
+        else:
+            return ''
 
     def version(self) -> str:
-        return self.user_agent.version
+        if self.version:
+            return self.user_agent.version
+        else:
+            return ''
 
     def display_language(self) -> str:
         humanized_language = UserInfo.LANGUAGES_DISPLAY.get(self.language)
